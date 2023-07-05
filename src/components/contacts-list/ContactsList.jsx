@@ -30,7 +30,7 @@ export function ContactsList() {
             </div>
 
             <span>arthurlopr@gmail.com</span>
-            <span>(37) 99987-5176</span>
+            <span>(37) 99999-9999</span>
           </div>
 
           <div className="actions">
@@ -51,7 +51,7 @@ export function ContactsList() {
             </div>
 
             <span>arthurlopr@gmail.com</span>
-            <span>(37) 99987-5176</span>
+            <span>(37) 99999-9999</span>
           </div>
 
           <div className="actions">
@@ -72,7 +72,7 @@ export function ContactsList() {
             </div>
 
             <span>arthurlopr@gmail.com</span>
-            <span>(37) 99987-5176</span>
+            <span>(37) 99999-9999</span>
           </div>
 
           <div className="actions">
