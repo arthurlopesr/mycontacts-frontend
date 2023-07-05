@@ -9,15 +9,10 @@ export default styled.select`
   height: 52px;
   padding: 16px;
   outline: none;
-  margin-top: 24px;
   font-size: 16px;
 
   &:focus {
     border: 2px solid ${({ theme }) => theme.colors.primary.main};
     transition: 0.2s ease-in;
-  }
-
-  & + & {
-    margin-top: 16px ;
   }
 `;

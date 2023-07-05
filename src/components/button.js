@@ -9,7 +9,6 @@ export default styled.button`
   justify-content: center;
   padding: 16px;
 
-  margin-top: 24px;
   border-radius: 4px;
   background: ${({ theme }) => theme.colors.primary.main};
   box-shadow: 0px 4px 10px 0px rgba(0, 0, 0, 0.04);
