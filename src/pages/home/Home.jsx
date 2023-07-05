@@ -1,5 +1,5 @@
 import {
-  Container, Header, ListContainer, Card,
+  Container, Header, ListContainer, Card, InputSeachContainer,
 } from './styles';
 import arrow from '../../assets/images/arrow.svg';
 import edit from '../../assets/images/edit.svg';
@@ -8,6 +8,10 @@ import trash from '../../assets/images/trash.svg';
 export function Home() {
   return (
     <Container>
+
+      <InputSeachContainer>
+        <input type="text" placeholder="Pesquisar contato..." />
+      </InputSeachContainer>
 
       <Header>
         <strong>3 contatos</strong>
