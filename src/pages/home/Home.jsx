@@ -5,10 +5,12 @@ import {
 import arrow from '../../assets/images/arrow.svg';
 import edit from '../../assets/images/edit.svg';
 import trash from '../../assets/images/trash.svg';
+import { Modal } from '../../components/modal/Modal';
 
 export function Home() {
   return (
     <Container>
+      <Modal danger />
 
       <InputSeachContainer>
         <input type="text" placeholder="Pesquisar contato..." />
