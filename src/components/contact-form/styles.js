@@ -9,4 +9,5 @@ export const ButtonContainer = styled.div`
   button {
     width: 100%;
   }
+
 `;
