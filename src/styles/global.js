@@ -9,7 +9,12 @@ export default createGlobalStyle`
     box-sizing: border-box;
 
     font-family: 'Sora', sans-serif;
+
+    @media (max-width: 414px) {
+    padding: 2px;
   }
+  }
+
 
   body {
     font-size: 16px;
@@ -20,4 +25,6 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+
 `;

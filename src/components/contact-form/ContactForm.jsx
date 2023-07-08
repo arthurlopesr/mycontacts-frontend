@@ -7,6 +7,7 @@ import { Form, ButtonContainer } from './styles';
 import Input from '../input';
 import Select from '../select';
 import Button from '../button';
+import formatPhone from '../../utils/formartPhone';
 
 export function ContactForm({ buttonLabel }) {
   const [name, setName] = useState('');
@@ -40,10 +41,15 @@ export function ContactForm({ buttonLabel }) {
     event.preventDefault();
   }
 
+  function handlePhoneChange(event) {
+    setPhone(formatPhone(event.target.value));
+  }
+
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
+          type="text"
           error={getErrorMessageByFieldName('name')}
           placeholder="Nome"
           value={name}
@@ -53,6 +59,7 @@ export function ContactForm({ buttonLabel }) {
 
       <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
+          type="email"
           error={getErrorMessageByFieldName('email')}
           placeholder="E-mail"
           value={email}
@@ -64,7 +71,8 @@ export function ContactForm({ buttonLabel }) {
         <Input
           placeholder="Telefone"
           value={phone}
-          onChange={(event) => setPhone(event.target.value)}
+          onChange={handlePhoneChange}
+          maxLength="15"
         />
       </FormGroup>
 
