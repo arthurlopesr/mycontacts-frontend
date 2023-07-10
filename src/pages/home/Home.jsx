@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import {
   Container, Header, ListContainer, Card, InputSeachContainer,
 } from './styles';
@@ -7,6 +8,21 @@ import edit from '../../assets/images/edit.svg';
 import trash from '../../assets/images/trash.svg';
 
 export function Home() {
+  const [contacts, setContacts] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3001/contacts')
+      .then(async (response) => {
+        const json = await response.json();
+        setContacts(json);
+      })
+      .catch((error) => {
+        console.log('erro', error);
+      });
+  }, []);
+
+  console.log(contacts);
+
   return (
     <Container>
       <InputSeachContainer>
@@ -14,31 +30,38 @@ export function Home() {
       </InputSeachContainer>
 
       <Header>
-        <strong>3 contatos</strong>
+        <strong>
+          {contacts.length}
+          {contacts.length === 1 ? ' contato' : ' contatos'}
+        </strong>
         <Link to="/new">Novo Contato</Link>
       </Header>
 
-      <ListContainer>
+      <ListHeader>
         <header>
           <button type="button" className="sort-button">
             <span>Nome</span>
             <img src={arrow} alt="Flecha de ordenação" />
           </button>
         </header>
+      </ListHeader>
 
-        <Card>
+      {contacts.map((contact) => (
+        <Card key={contact.id}>
           <div className="info">
             <div className="contact-name">
-              <strong>Arthur Lopes</strong>
-              <small>Intagram</small>
+              <strong>{contact.name}</strong>
+              {contact.category_name && (
+                <small>{contact.category_name}</small>
+              )}
             </div>
 
-            <span>arthurlopr@gmail.com</span>
-            <span>(37) 99999-9999</span>
+            <span>{contact.email}</span>
+            <span>{contact.phone}</span>
           </div>
 
           <div className="actions">
-            <Link to="/edit/123">
+            <Link to={`/edit/${contact.id}`}>
               <img src={edit} alt="Editar" />
             </Link>
             <button type="button">
@@ -46,8 +69,7 @@ export function Home() {
             </button>
           </div>
         </Card>
-
-      </ListContainer>
+      ))}
     </Container>
   );
 }
