@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import {
-  Container, Header, ListContainer, Card, InputSeachContainer,
+  Container, Header, ListHeader, Card, InputSeachContainer,
 } from './styles';
 import arrow from '../../assets/images/arrow.svg';
 import edit from '../../assets/images/edit.svg';
@@ -9,9 +9,10 @@ import trash from '../../assets/images/trash.svg';
 
 export function Home() {
   const [contacts, setContacts] = useState([]);
+  const [orderBy, setOrderBy] = useState('esc');
 
   useEffect(() => {
-    fetch('http://localhost:3001/contacts')
+    fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
         const json = await response.json();
         setContacts(json);
@@ -19,9 +20,13 @@ export function Home() {
       .catch((error) => {
         console.log('erro', error);
       });
-  }, []);
+  }, [orderBy]);
 
-  console.log(contacts);
+  function handleToggleOrderBy() {
+    setOrderBy(
+      (prevState) => (prevState === 'esc' ? 'desc' : 'esc'),
+    );
+  }
 
   return (
     <Container>
@@ -37,9 +42,9 @@ export function Home() {
         <Link to="/new">Novo Contato</Link>
       </Header>
 
-      <ListHeader>
+      <ListHeader orderBy={orderBy}>
         <header>
-          <button type="button" className="sort-button">
+          <button type="button" onClick={handleToggleOrderBy}>
             <span>Nome</span>
             <img src={arrow} alt="Flecha de ordenação" />
           </button>
