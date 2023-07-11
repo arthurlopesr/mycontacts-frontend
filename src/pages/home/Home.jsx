@@ -3,27 +3,38 @@ import { useEffect, useState, useMemo } from 'react';
 import {
   Container, Header, ListHeader, Card, InputSeachContainer,
 } from './styles';
+import Loader from '../../components/loader/Loader';
 import arrow from '../../assets/images/arrow.svg';
 import edit from '../../assets/images/edit.svg';
 import trash from '../../assets/images/trash.svg';
+import delay from '../../utils/delay';
 
 export function Home() {
   const [contacts, setContacts] = useState([]);
   const [orderBy, setOrderBy] = useState('esc');
   const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
 
   const filteredContacts = useMemo(() => contacts.filter((contact) => (
     contact.name.toLowerCase().includes(searchTerm.toLocaleLowerCase())
   )), [contacts, searchTerm]);
 
   useEffect(() => {
+    setIsLoading(true);
+
     fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
       .then(async (response) => {
+        await delay(500);
+
         const json = await response.json();
         setContacts(json);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.log('erro', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   }, [orderBy]);
 
@@ -39,6 +50,7 @@ export function Home() {
 
   return (
     <Container>
+      <Loader isLoading={isLoading} />
       <InputSeachContainer>
         <input
           value={searchTerm}
