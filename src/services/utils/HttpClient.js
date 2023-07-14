@@ -14,7 +14,7 @@ class HttpClient {
       return response.json();
     }
 
-    throw new Error();
+    throw new Error(`${response.status} - ${response.statusText}`);
   }
 }
 
